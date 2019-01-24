@@ -4,7 +4,9 @@ For general questions regarding this contest, please contact Jeff Goeders <jgoed
 
 ## Setup PYNQ on your Ultra96 board
 
-Download the board image from http://www.pynq.io/board.html, and follow the instructions to image the SD card at https://pynq.readthedocs.io/en/latest/getting_started/pynq_image.html.  Follow the instructions to connect to the board at https://ultra96-pynq.readthedocs.io/en/latest/getting_started.html.
+  * Download the board image from http://www.pynq.io/board.html
+  * Follow the instructions to image the SD card at https://pynq.readthedocs.io/en/latest/getting_started/pynq_image.html.  
+  * Follow the instructions to setup and connect to the board at https://ultra96-pynq.readthedocs.io/en/latest/getting_started.html.
 
 ## Usage
 The get started, users have to run the following command on the Ultra96 board:
