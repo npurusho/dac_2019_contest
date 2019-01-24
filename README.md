@@ -18,8 +18,7 @@ sudo git clone https://github.com/jgoeders/dac_2019_contest.git
 Remember the user name and password are both `xilinx` for super user.
 
 After the above step is completed successfully, you will see a folder `dac_2019_contest` under your 
-jupyter notebook dashboard.
-
+jupyter notebook dashboard.  Open the `pynquser/dac_contest.ipynb` notebook for directions on where to begin.
 
 ## Folder Structure
 
@@ -30,3 +29,5 @@ jupyter notebook dashboard.
 3. python: This folder contains the python classes needed for the design, as well as the example notebook(s).
 
 4. result: The results includes the coordinates of the resized pictures and the frame rate of each picture.
+
+
