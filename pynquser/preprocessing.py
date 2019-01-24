@@ -4,13 +4,13 @@ import xml.dom.minidom
 
 
 BATCH_SIZE = 500
-DAC_CONTEST = '/home/xilinx/jupyter_notebooks/dac_2018'
-IMG_DIR = '/home/xilinx/jupyter_notebooks/dac_2018/images'
-OVERLAY_DIR = '/home/xilinx/jupyter_notebooks/dac_2018/overlay'
-RESULT = '/home/xilinx/jupyter_notebooks/dac_2018/result'
-TIME_DIR = '/home/xilinx/jupyter_notebooks/dac_2018/result/time'
-COORD_DIR = '/home/xilinx/jupyter_notebooks/dac_2018/result/coordinate'
-XML_PATH = '/home/xilinx/jupyter_notebooks/dac_2018/result/xml'
+DAC_CONTEST = '/home/xilinx/jupyter_notebooks/dac_2019_contest'
+IMG_DIR = '/home/xilinx/jupyter_notebooks/dac_2019_contest/images'
+OVERLAY_DIR = '/home/xilinx/jupyter_notebooks/dac_2019_contest/overlay'
+RESULT = '/home/xilinx/jupyter_notebooks/dac_2019_contest/result'
+TIME_DIR = '/home/xilinx/jupyter_notebooks/dac_2019_contest/result/time'
+COORD_DIR = '/home/xilinx/jupyter_notebooks/dac_2019_contest/result/coordinate'
+XML_PATH = '/home/xilinx/jupyter_notebooks/dac_2019_contest/result/xml'
 
     
 # Get image name list
@@ -75,18 +75,36 @@ class Agent:
             f.write("\n" + teamname + " Frames per second: " +
                     str(fps) + '\n')
 
-    def save_results_xml(self, result_rectangle):
+    def save_results_xml(self, result_rectangle, runtime, energy):
         if len(result_rectangle) != len(self.img_list):
             raise ValueError("Result length not equal to number of images.")
+
+        doc = xml.dom.minidom.Document()
+        root = doc.createElement('results')
+
+        perf_e = doc.createElement('performance')
+        
+        # Runtime
+        runtime_e = doc.createElement('runtime')
+        runtime_e.appendChild(doc.createTextNode(str(runtime)))
+        perf_e.appendChild(runtime_e)
+        root.appendChild(runtime_e)
+
+        # Energy
+        energy_e = doc.createElement('energy')
+        energy_e.appendChild(doc.createTextNode(str(energy)))
+        perf_e.appendChild(energy_e)
+        root.appendChild(energy_e)
+
+
         for i in range(len(self.img_list)):
-            doc = xml.dom.minidom.Document()
-            root = doc.createElement('annotation')
+            image_e = root.appendChild(doc.createElement("image"))
 
             doc.appendChild(root)
             name_e = doc.createElement('filename')
             name_t = doc.createTextNode(self.img_list[i])
             name_e.appendChild(name_t)
-            root.appendChild(name_e)
+            image_e.appendChild(name_e)
 
             size_e = doc.createElement('size')
             node_width = doc.createElement('width')
@@ -95,7 +113,7 @@ class Agent:
             node_length.appendChild(doc.createTextNode("360"))
             size_e.appendChild(node_width)
             size_e.appendChild(node_length)
-            root.appendChild(size_e)
+            image_e.appendChild(size_e)
 
             object_node = doc.createElement('object')
             node_name = doc.createElement('name')
@@ -120,9 +138,9 @@ class Agent:
 
             object_node.appendChild(node_name)
             object_node.appendChild(node_bnd_box)
-            root.appendChild(object_node)
+            image_e.appendChild(object_node)
 
-            file_name = self.img_list[i].replace('jpg', 'xml')
-            with open(self.xml_team + "/" + file_name, 'w') as fp:
+            file_name = self.xml_team + "/results.xml"
+            with open(file_name, 'w') as fp:
                 doc.writexml(fp, indent='\t', addindent='\t',
                              newl='\n', encoding="utf-8")
