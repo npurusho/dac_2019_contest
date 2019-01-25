@@ -14,7 +14,7 @@ hw_data_files = []
 # copy overlays to python package
 def copy_overlays():
     src_ol_dir = os.path.join(overlay_folder, '')
-    dst_ol_dir = os.path.join('dac_2019_contest', 'bitstream')
+    dst_ol_dir = os.path.join('pynquser', 'bitstream')
     copy_tree(src_ol_dir, dst_ol_dir)
     hw_data_files.extend([os.path.join("..", dst_ol_dir, f) for f in os.listdir(dst_ol_dir)])
 
@@ -22,7 +22,7 @@ def copy_overlays():
 # copy notebooks to jupyter home
 def copy_notebooks():
     src_nb_dir = os.path.join(notebooks_folder, '')
-    dst_nb_dir = os.path.join(board_notebooks_dir, 'dac_2019_contest')
+    dst_nb_dir = os.path.join(board_notebooks_dir, 'pynquser')
     if os.path.exists(dst_nb_dir):
         shutil.rmtree(dst_nb_dir)
     copy_tree(src_nb_dir, dst_nb_dir)
