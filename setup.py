@@ -7,7 +7,7 @@ import shutil
 overlay_folder = f'overlay/pynquser'
 images_folder = f'images'
 results_folder = f'result'
-notebooks_folder = f'pynquse'
+notebooks_folder = f'pynquser'
 board_notebooks_dir = os.environ['PYNQ_JUPYTER_NOTEBOOKS']
 hw_data_files = []
 
