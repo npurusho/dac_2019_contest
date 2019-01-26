@@ -26,9 +26,17 @@ def copy_notebooks():
     if os.path.exists(dst_nb_dir):
         shutil.rmtree(dst_nb_dir)
     copy_tree(src_nb_dir, dst_nb_dir)
+    
+# copy images
+def copy_images():
+    src_ol_dir = os.path.join(images_folder, '')
+    dst_ol_dir = os.path.join('pynquser', 'images')
+    copy_tree(src_ol_dir, dst_ol_dir)
+    hw_data_files.extend([os.path.join("..", dst_ol_dir, f) for f in os.listdir(dst_ol_dir)])
 
 copy_overlays()
 copy_notebooks()
+copy_images()
 
 setup(
     name="dac_2019_contest",
