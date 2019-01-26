@@ -6,6 +6,7 @@ import shutil
 # global variables
 overlay_folder = f'overlay/pynquser'
 images_folder = f'images'
+results_folder = f'results'
 notebooks_folder = f'pynquser'
 board_notebooks_dir = os.environ['PYNQ_JUPYTER_NOTEBOOKS']
 hw_data_files = []
@@ -34,9 +35,17 @@ def copy_images():
     copy_tree(src_ol_dir, dst_ol_dir)
     hw_data_files.extend([os.path.join("..", dst_ol_dir, f) for f in os.listdir(dst_ol_dir)])
 
+# copy results folder
+def copy_results():
+    src_ol_dir = os.path.join(results_folder, '')
+    dst_ol_dir = os.path.join('pynquser', 'results')
+    copy_tree(src_ol_dir, dst_ol_dir)
+    hw_data_files.extend([os.path.join("..", dst_ol_dir, f) for f in os.listdir(dst_ol_dir)])
+
 copy_overlays()
 copy_notebooks()
 copy_images()
+copy_results()
 
 setup(
     name="dac_2019_contest",
