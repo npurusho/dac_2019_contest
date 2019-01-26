@@ -8,6 +8,16 @@ For general questions regarding this contest, please contact Jeff Goeders <jgoed
   * Follow the instructions to image the SD card at https://pynq.readthedocs.io/en/latest/getting_started/pynq_image.html.  
   * Follow the instructions to setup and connect to the board at https://ultra96-pynq.readthedocs.io/en/latest/getting_started.html.
 
+## Quick Start
+
+Open a terminal on your PYNQ board and run:
+
+```
+sudo pip3 install --upgrade git+https://github.com/npurusho/dac_2019_contest.git
+```
+
+Currently this repository is compatible with [PYNQ image v2.3](http://www.pynq.io/board).
+
 ## Usage
 The get started, users have to run the following command on the Ultra96 board:
 
